@@ -28,4 +28,4 @@ const isRightLengthOfString = function (string, maxLength) {
   return string.length <= maxLength;
 };
 
-isRightLengthOfString('я тут был',10)
+isRightLengthOfString('я тут был',10);
