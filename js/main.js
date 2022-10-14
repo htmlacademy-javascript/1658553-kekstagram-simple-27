@@ -71,6 +71,5 @@ const createPhotoDescription = function (quantity )
   return photosList;
 };
 
-const arrayOfPhotos = createPhotoDescription(25);
+const _arrayOfPhotos = createPhotoDescription(25);
 
-console.table(arrayOfPhotos)
