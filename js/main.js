@@ -1,7 +1,19 @@
-import {createPhotoDescription} from './createPhotosList.js'
+import {createPhotoDescription} from './mock/create-photos-list.js';
+import {renderThumbnails} from './project-src/rendering-thumbnails.js';
 
-let _photoArrOfObj = createPhotoDescription(25);
+const QUANTITY_PHOTOS = 25;
+
+const arrOfMockPhotos = createPhotoDescription(QUANTITY_PHOTOS);
+
+renderThumbnails(arrOfMockPhotos);
+
 // eslint-disable-next-line no-console
-console.log(_photoArrOfObj);
+
+
+
+
+
+
+
 
 
