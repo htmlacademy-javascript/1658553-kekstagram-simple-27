@@ -1,4 +1,4 @@
-import {getRandomInteger} from './utilits/utilits.js';
+import {getRandomInteger} from './utilits.js';
 
 /**
  * Константы для объекта фото

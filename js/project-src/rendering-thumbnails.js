@@ -1,8 +1,3 @@
-import {createPhotoDescription} from '../mock/createPhotosList.js';
-
-const QUANTITY_PHOTOS = 25;
-
-const arrOfMockPhotos = createPhotoDescription(QUANTITY_PHOTOS);
 
 const section = document.querySelector('.pictures');
 
@@ -11,7 +6,8 @@ const template = document.querySelector('#picture').content;
 
 
 
-const renderThumbnails = function (template, arrOfMockPhotos) {
+const renderThumbnails = function (arrOfMockPhotos)
+{
 
   const fragmentToPhotos = document.createDocumentFragment();
 
@@ -28,10 +24,5 @@ const renderThumbnails = function (template, arrOfMockPhotos) {
 };
 
 
-// // eslint-disable-next-line no-console
-renderThumbnails(template,arrOfMockPhotos)
 
-
-
-let qwe = 123;
-export {qwe};
+export {renderThumbnails};
