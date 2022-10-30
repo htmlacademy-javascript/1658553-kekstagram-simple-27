@@ -1,8 +1,8 @@
 import {validateComment} from './validate-form-comment.js';
 
-import {changeSizeUploadedImg} from './scale-img-form.js';
+import {changeSizeUploadedImgToHigh,changeSizeUploadedImgToLow,defaultSize} from './scale-img-form.js';
 
-import {changeEffect} from './change-img-effect-in-form.js';
+import {changeEffect,defaultEffect} from './change-img-effect-in-form.js';
 
 const imgInput = document.querySelector('.img-upload__input');
 
@@ -12,6 +12,24 @@ const closeEditorPopupButton = document.querySelector('.img-upload__cancel');
 
 const imgUploadForm = document.querySelector('.img-upload__form');
 
+const biggerButton = document.querySelector('.scale__control--bigger');
+
+const smallerButton = document.querySelector('.scale__control--smaller');
+
+
+imgInput.addEventListener('change', function (evt) {
+
+  if (validateType(evt.target.files[0].type)) {
+    showImgEditorPopup();
+
+  }
+
+});
+
+
+biggerButton.addEventListener('click',changeSizeUploadedImgToHigh);
+
+smallerButton.addEventListener('click',changeSizeUploadedImgToLow)
 
 
 const validateType = function (file) {
@@ -28,14 +46,11 @@ const onEditorPopupKeyDown = function (evt) {
   }
 };
 
-
 const showImgEditorPopup = function ()
 {
   imgEditor.classList.remove('hidden');
 
   imgUploadForm.addEventListener('submit',validateComment);
-
-  changeSizeUploadedImg();
 
   changeEffect();
 
@@ -45,9 +60,13 @@ const showImgEditorPopup = function ()
 
 const closeImgEditorPopup = function ()
 {
+
+  defaultEffect();
+  defaultSize();
   imgEditor.classList.add('hidden');
   document.removeEventListener('keydown', onEditorPopupKeyDown);
   imgInput.value = '';
+
 }
 
 closeEditorPopupButton.addEventListener('click', function (evt)
@@ -60,11 +79,4 @@ closeEditorPopupButton.addEventListener('click', function (evt)
 
 
 
-imgInput.addEventListener('change', function (evt) {
 
-  if (validateType(evt.target.files[0].type)) {
-    showImgEditorPopup();
-
-  }
-
-});
