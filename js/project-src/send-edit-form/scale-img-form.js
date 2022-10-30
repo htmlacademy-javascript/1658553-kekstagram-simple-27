@@ -1,36 +1,41 @@
-let sizeImgValueNumber = parseInt(document.querySelector('.scale__control--value').value);
-
 let sizeImgValue = document.querySelector('.scale__control--value');
 
-let image = document.querySelector('.img-upload__preview');
+const image = document.querySelector('.img-upload__preview');
 
-const biggerButton = document.querySelector('.scale__control--bigger');
 
-const smallerButton = document.querySelector('.scale__control--smaller');
 
-const changeSizeUploadedImg = function ()
+
+
+const changeSizeUploadedImgToHigh = function (evt)
 {
+  let sizeImgValueNumber = parseInt(document.querySelector('.scale__control--value').value);
+  if (sizeImgValueNumber<100){
+    sizeImgValueNumber = sizeImgValueNumber + 25;
+    sizeImgValue.setAttribute('value',sizeImgValueNumber + '%');
+    image.style.scale = sizeImgValue.value;
 
-  biggerButton.addEventListener('click',function (evt){
-    if (sizeImgValueNumber<100){
+  } else {
+    evt.preventDefault();
+  }
+}
 
-      sizeImgValueNumber = sizeImgValueNumber + 25;
-      sizeImgValue.setAttribute('value',sizeImgValueNumber + '%');
-      image.style.scale = sizeImgValue.value;
-    } else {
-      evt.preventDefault();
-    }
-  });
+const changeSizeUploadedImgToLow = function (evt)
+{
+  let sizeImgValueNumber = parseInt(document.querySelector('.scale__control--value').value);
+  if (sizeImgValueNumber>25){
+    sizeImgValueNumber = sizeImgValueNumber - 25;
+    sizeImgValue.setAttribute('value',sizeImgValueNumber + '%');
+    image.style.scale = sizeImgValue.value;
+  } else {
+    evt.preventDefault();
+  }
+}
 
-  smallerButton.addEventListener('click',function (evt){
-    if (sizeImgValueNumber>25){
-      sizeImgValueNumber = sizeImgValueNumber - 25;
-      sizeImgValue.setAttribute('value',sizeImgValueNumber + '%');
-      image.style.scale = sizeImgValue.value;
-    } else {
-      evt.preventDefault();
-    }
-  })
+const defaultSize = function ()
+{
+  sizeImgValue.setAttribute('value',100 + '%');
+  image.style.scale = sizeImgValue.value;
 
 }
-export {changeSizeUploadedImg};
+
+export {changeSizeUploadedImgToHigh,changeSizeUploadedImgToLow,defaultSize};
