@@ -1,4 +1,3 @@
-/* global Pristine:readonly */
 const imgUploadForm = document.querySelector('.img-upload__form');
 
 
@@ -19,6 +18,5 @@ const validateComment = function (evt) {
 };
 
 export {validateComment};
-
 
 
