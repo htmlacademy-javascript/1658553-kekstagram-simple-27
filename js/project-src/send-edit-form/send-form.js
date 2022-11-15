@@ -71,4 +71,3 @@ const closeEditorPopup = function () {
 export {openEditorPopup, changeSizeInEditorPopup, closeEditorPopup};
 
 
-

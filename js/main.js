@@ -16,6 +16,3 @@ createSlider();
 changeSliderLine();
 
 
-
-
-

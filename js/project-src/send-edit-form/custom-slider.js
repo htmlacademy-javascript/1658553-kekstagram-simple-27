@@ -58,8 +58,7 @@ const createSlider = function (){
     step: 1,
     connetct: 'lower',
   });
-}
-
+};
 
 
 const effectFilterValue = function (checkedElement) {
@@ -76,8 +75,7 @@ const changeSliderLine = function (){
     bigImg.style.filter = effectFilterValue(checkedElement, effectElementLevelInput);
 
   });
-}
-
+};
 
 
 const sliderIntensitySetting = function (currentEffect) {
