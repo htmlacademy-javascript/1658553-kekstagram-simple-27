@@ -1,6 +1,6 @@
-import {validateComment} from './validate-form-comment.js';
+import {onCommentSubmit} from './validate-form-comment.js';
 
-import {changeSizeUploadedImgToHigh, changeSizeUploadedImgToLow, defaultSize} from './scale-img-form.js';
+import {defaultSize, onChangeSizeUploadedImgToHigh, onChangeSizeUploadedImgToLow} from './scale-img-form.js';
 
 import {changeEffect, defaultEffect} from './change-img-effect-in-form.js';
 import {defaultSliderParams} from './custom-slider.js';
@@ -17,59 +17,58 @@ const biggerButton = document.querySelector('.scale__control--bigger');
 
 const smallerButton = document.querySelector('.scale__control--smaller');
 
-const validateType = function (file) {
-  return file === 'image/jpeg' || file === 'image/png';
+const validateType = function (fileType) {
+  return fileType === 'image/jpeg' || fileType === 'image/png';
 };
 
-// eslint-disable-next-line no-console
-const closeImgEditorPopup = function () {
+
+const onCloseImgEditorPopup = function () {
 
   defaultEffect();
   defaultSize();
   imgEditor.classList.add('hidden');
-  // eslint-disable-next-line no-console
+
   document.removeEventListener('keydown', onEditorPopupKeyDown);
   imgInput.value = '';
   defaultSliderParams();
 
 };
 
-const onEditorPopupKeyDown = function (evt) {
-  if (evt.key === 'Escape') {
+function onEditorPopupKeyDown(evt) {
+  if (evt.key === 'Escape' || evt.key === 'esc') {
     evt.preventDefault();
-    // eslint-disable-next-line no-console
-    closeImgEditorPopup();
+    onCloseImgEditorPopup();
   }
-};
+}
+
+
 const showImgEditorPopup = function () {
   imgEditor.classList.remove('hidden');
-
-  imgUploadForm.addEventListener('submit', validateComment);
-
+  imgUploadForm.addEventListener('submit', onCommentSubmit);
   changeEffect();
-
   document.addEventListener('keydown', onEditorPopupKeyDown);
-
 };
 
-imgInput.addEventListener('change', function (evt) {
+const openEditorPopup = function () {
+  imgInput.addEventListener('change', (evt) => {
 
-  if (validateType(evt.target.files[0].type)) {
-    showImgEditorPopup();
+    if (validateType(evt.target.files[0].type)) {
+      showImgEditorPopup();
+    }
+  });
+};
 
-  }
+const changeSizeInEditorPopup = function () {
+  biggerButton.addEventListener('click', onChangeSizeUploadedImgToHigh);
 
-});
+  smallerButton.addEventListener('click', onChangeSizeUploadedImgToLow);
+};
 
+const closeEditorPopup = function () {
+  closeEditorPopupButton.addEventListener('click', onCloseImgEditorPopup);
+};
 
-biggerButton.addEventListener('click', changeSizeUploadedImgToHigh);
+export {openEditorPopup, changeSizeInEditorPopup, closeEditorPopup};
 
-smallerButton.addEventListener('click', changeSizeUploadedImgToLow);
-
-
-closeEditorPopupButton.addEventListener('click', function () {
-  closeImgEditorPopup();
-
-});
 
 

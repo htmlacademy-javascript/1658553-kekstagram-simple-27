@@ -8,7 +8,7 @@ const pristine = new Pristine(imgUploadForm, {
 });
 
 
-const validateComment = function (evt) {
+const onCommentSubmit = function (evt) {
 
   const isValid = pristine.validate();
 
@@ -17,6 +17,6 @@ const validateComment = function (evt) {
   }
 };
 
-export {validateComment};
+export {onCommentSubmit};
 
 

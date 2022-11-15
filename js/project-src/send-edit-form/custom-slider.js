@@ -7,106 +7,98 @@ const effectElementLevelInput = document.querySelector('.effect-level__value');
 const bigImg = document.querySelector('.img-upload__preview').children[0];
 
 const EFFECT_LIST = {
-  effect_chrome: 'chrome',
-  effect_sepia: 'sepia',
-  effect_marvin: 'marvin',
-  effect_phobos: 'phobos',
-  effect_heat: 'heat',
-
-}
-
-noUiSlider.create(slideElement, {
-  range: {
+  chrome: {
+    effect: 'grayscale',
+    format: '',
     min: 0,
-    max: effectElementsCount - 1,
+    max: 1,
+    step: 0.1
   },
-  start: 0,
-  step: 1,
-  connetct: 'lower',
-});
-
-slideElement.noUiSlider.on('update', function (_,handle,unencoded) {
-  let checkedElement = document.querySelectorAll('input[name=effect]:checked')[0]
-
-  effectElementLevelInput.value = unencoded[handle];
-  if (checkedElement.value===EFFECT_LIST.effect_chrome){
-    bigImg.style.filter = `grayscale(${effectElementLevelInput.value})`
-  }
-  if (checkedElement.value===EFFECT_LIST.effect_sepia){
-    bigImg.style.filter = `sepia(${effectElementLevelInput.value})`
-  }
-  if (checkedElement.value===EFFECT_LIST.effect_marvin){
-    bigImg.style.filter = `invert(${effectElementLevelInput.value}%)`
-  }
-  if (checkedElement.value===EFFECT_LIST.effect_phobos){
-    bigImg.style.filter = `blur(${effectElementLevelInput.value}px)`
-  }
-  if (checkedElement.value===EFFECT_LIST.effect_heat){
-    bigImg.style.filter = `brightness(${effectElementLevelInput.value})`
-  }
-
-
-});
-
-
-const sliderIntensitySetting = function (effect) {
-
-  if (effect.value === EFFECT_LIST.effect_chrome) {
-    slideElement.noUiSlider.updateOptions({
-      range: {
-        min: 0,
-        max: 1,
-      },
-      step: 0.1
-    });
-
-  }
-  if (effect.value === EFFECT_LIST.effect_sepia) {
-    slideElement.noUiSlider.updateOptions({
-      range: {
-        min: 0,
-        max: 1,
-      },
-      step: 0.1
-    });
-  }
-  if (effect.value === EFFECT_LIST.effect_marvin) {
-    slideElement.noUiSlider.updateOptions({
-      range: {
-        min: 0,
-        max: 100,
-      },
-      step: 1
-    });
-  }
-  if (effect.value === EFFECT_LIST.effect_phobos) {
-    slideElement.noUiSlider.updateOptions({
-      range: {
-        min: 0,
-        max: 3,
-      },
-      step: 0.1
-    });
-  }
-  if (effect.value === EFFECT_LIST.effect_heat) {
-    slideElement.noUiSlider.updateOptions({
-      range: {
-        min: 1,
-        max: 3,
-      },
-      step: 0.1
-    });
+  sepia: {
+    effect: 'sepia',
+    format: '',
+    min: 0,
+    max: 1,
+    step: 0.1
+  },
+  marvin: {
+    effect: 'invert',
+    format: '%',
+    min: 0,
+    max: 100,
+    step: 1
+  },
+  phobos: {
+    effect: 'blur',
+    format: 'px',
+    min: 0,
+    max: 3,
+    step: 0.1
+  },
+  heat: {
+    effect: 'brightness',
+    format: '',
+    min: 1,
+    max: 3,
+    step: 0.1
+  },
+  none: {
+    effect: '',
+    format: '',
   }
 
 };
+const createSlider = function (){
+  noUiSlider.create(slideElement, {
+    range: {
+      min: 0,
+      max: effectElementsCount - 1,
+    },
+    start: 0,
+    step: 1,
+    connetct: 'lower',
+  });
+}
 
 
-const onUpdateSliderClick = function (effect) {
-  defaultSliderParams();
-  if (effect.value !== 'none') {
-    sliderField.style = 'display:block';
-    sliderIntensitySetting(effect);
+
+const effectFilterValue = function (checkedElement) {
+  return `${EFFECT_LIST[checkedElement.value].effect }(${effectElementLevelInput.value}${EFFECT_LIST[checkedElement.value].format})`;
+};
+
+const changeSliderLine = function (){
+  slideElement.noUiSlider.on('update', (_, handle, unencoded) => {
+    const checkedElement = document.querySelectorAll('input[name=effect]:checked')[0];
+
+    effectElementLevelInput.value = unencoded[handle];
+
+
+    bigImg.style.filter = effectFilterValue(checkedElement, effectElementLevelInput);
+
+  });
+}
+
+
+
+const sliderIntensitySetting = function (currentEffect) {
+
+
+  for (const effect in EFFECT_LIST) {
+
+    if (currentEffect.value === effect) {
+
+      const sliderConfig = {
+        start: EFFECT_LIST[effect].max,
+        range: {
+          min: EFFECT_LIST[effect].min,
+          max: EFFECT_LIST[effect].max,
+        },
+        step: EFFECT_LIST[effect].step
+      };
+      slideElement.noUiSlider.updateOptions(sliderConfig);
+    }
   }
+
 
 };
 
@@ -116,10 +108,16 @@ const defaultSliderParams = function () {
   sliderField.style = 'display:none';
 };
 
+const updateSliderClick = function (effect) {
+  defaultSliderParams();
+  if (effect.value !== 'none') {
+    sliderField.style = 'display:block';
+    sliderIntensitySetting(effect);
+  }
 
-export {onUpdateSliderClick, defaultSliderParams};
+};
 
 
-
+export {updateSliderClick, defaultSliderParams,changeSliderLine,createSlider};
 
 

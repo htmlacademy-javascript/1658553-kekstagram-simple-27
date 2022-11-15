@@ -6,7 +6,7 @@ const ONE_STEP_SIZE = 25;
 
 const DEFAULT_SIZE = 100;
 
-const changeSizeUploadedImgToHigh = function (evt)
+const onChangeSizeUploadedImgToHigh = function (evt)
 {
   let sizeImgValueNumber = parseInt(document.querySelector('.scale__control--value').value,10);
   if (sizeImgValueNumber < DEFAULT_SIZE){
@@ -19,7 +19,7 @@ const changeSizeUploadedImgToHigh = function (evt)
   }
 };
 
-const changeSizeUploadedImgToLow = function (evt)
+const onChangeSizeUploadedImgToLow = function (evt)
 {
   let sizeImgValueNumber = parseInt(document.querySelector('.scale__control--value').value,10);
   if (sizeImgValueNumber > ONE_STEP_SIZE){
@@ -38,4 +38,4 @@ const defaultSize = function ()
 
 };
 
-export {changeSizeUploadedImgToHigh,changeSizeUploadedImgToLow,defaultSize};
+export {onChangeSizeUploadedImgToHigh,onChangeSizeUploadedImgToLow,defaultSize};

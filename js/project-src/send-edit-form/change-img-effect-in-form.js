@@ -1,4 +1,4 @@
-import {onUpdateSliderClick} from './custom-slider.js'
+import {updateSliderClick} from './custom-slider.js';
 const effectsList = document.querySelectorAll('.effects__radio');
 
 const bigImg = document.querySelector('.img-upload__preview').children[0];
@@ -13,11 +13,11 @@ const changeEffect = function ()
 
     effect.addEventListener('click',() => {
 
-      effect.checked = true
+      effect.checked = true;
 
       bigImg.classList.value = '';
       bigImg.classList.add(`effects__preview--${ effect.value}`);
-      onUpdateSliderClick(effect)
+      updateSliderClick(effect);
 
     });
   }
@@ -26,9 +26,9 @@ const changeEffect = function ()
 const defaultEffect = function ()
 {
   for (const effect of effectsList) {
-    effect.checked = false
+    effect.checked = false;
   }
-  defaultEffectInput.checked = true
+  defaultEffectInput.checked = true;
   bigImg.classList.value = '';
   bigImg.classList.add('effects__preview--none');
 };
