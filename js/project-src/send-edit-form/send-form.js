@@ -4,7 +4,7 @@ import {defaultSize, onChangeSizeUploadedImgToHigh, onChangeSizeUploadedImgToLow
 
 import {changeEffect, defaultEffect} from './change-img-effect-in-form.js';
 import {defaultSliderParams} from './custom-slider.js';
-
+//test git
 const imgInput = document.querySelector('.img-upload__input');
 
 const imgEditor = document.querySelector('.img-upload__overlay');
