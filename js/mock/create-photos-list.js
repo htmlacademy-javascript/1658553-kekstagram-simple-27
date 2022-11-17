@@ -14,7 +14,6 @@ const COMMENT_COUNT = {
 };
 
 
-
 /**
  * Создание массива объектов.
  * @param quantity кол-во созданных объектов
@@ -24,8 +23,8 @@ const createPhotoDescription = function (quantity)
 {
   const photosList = [];
 
-  for (let i=1 ; i <= quantity; i++) {
-    photosList[i-1] = {
+  for (let i = 1 ; i <= quantity; i++) {
+    photosList[i - 1] = {
       id: i,
       url: `photos/${i}.jpg`,
       description: (Math.random() + 1).toString(36).substring(7),
